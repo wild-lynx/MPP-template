@@ -1,0 +1,36 @@
+buildscript {
+    ext.kotlin_version = kotlin_version
+
+}
+apply plugin: 'kotlin-platform-js'
+
+
+dependencies {
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutines_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    expectedBy project(":MPP-template-common")
+    testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+
+
+compileKotlin2Js {
+    kotlinOptions {
+        //freeCompilerArgs = ["-Xprogressive"]
+        //freeCompilerArgs = ["-XXLanguage:+NewInference"]
+        //freeCompilerArgs = ["-Xprogressive", "-XXLanguage:+NewInference", "-XXLanguage:+SamConversionForKotlinFunctions"]
+    }
+}
+
+compileTestKotlin2Js {
+    kotlinOptions {
+       // freeCompilerArgs = ["-Xprogressive"]
+    }
+}

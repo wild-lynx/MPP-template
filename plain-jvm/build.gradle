@@ -1,0 +1,36 @@
+buildscript {
+    ext.kotlin_version = kotlin_version
+}
+apply plugin: 'java'
+apply plugin: "kotlin"
+
+
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    compile project(":MPP-template-jvm")
+    testCompile "junit:junit:4.12"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+       // freeCompilerArgs = ["-Xprogressive", "-XXLanguage:+NewInference", "-XXLanguage:+SamConversionForKotlinFunctions"]
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+       //  freeCompilerArgs = ["-Xprogressive"]
+    }
+}
+
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}

@@ -1,0 +1,14 @@
+pluginManagement {
+    repositories {
+        maven {
+            url 'http://dl.bintray.com/kotlin/kotlin-eap'
+        }
+        mavenCentral()
+        google()
+        jcenter()
+    }
+}
+rootProject.name = 'MPP-template'
+
+include 'MPP-template-common', 'MPP-template-jvm', 'MPP-template-js', 'plain-jvm', 'app', 'android-lib'
+

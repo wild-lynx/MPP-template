@@ -1,0 +1,67 @@
+buildscript {
+    ext.kotlin_version = kotlin_version
+
+}
+
+plugins {
+    id 'java-library'
+}
+
+apply plugin: 'maven-publish'
+apply plugin: 'kotlin-platform-common'
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId 'org.jetbrains.qa'
+            artifactId 'mpp-common-part'
+            version '0.1.2'
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+}
+
+dependencies {
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutines_version"
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test-annotations-common:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test-common:$kotlin_version"
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+sourceSets {
+    main.kotlin.srcDirs += 'src/main/kotlin'
+    test.kotlin.srcDirs += 'src/test/kotlin'
+}
+
+test {
+    include 'src/test/kotlin'
+}
+
+/*
+compileKotlinCommon {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xprogressive"]
+    }
+}
+
+compileTestKotlinCommon {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xprogressive"]
+    }
+}
+*/
